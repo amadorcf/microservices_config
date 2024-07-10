@@ -9,11 +9,13 @@ spring:
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
 server: 
   port: 10000
-# Config de el servidor  
-eureka: 
-  client:
-    serviceUrl:
-      # Direccion a la que se conecta el microservicio con eureka
-      defaultZone: http://localhost:8761/eureka
+
+cors:
+  allowed-origins: "*"
+  allowed-methods: "GET,POST,PUT,DELETE"
+  allowed-headers: "*"
+  allow-credentials: true
+  
