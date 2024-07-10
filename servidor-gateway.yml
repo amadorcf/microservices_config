@@ -1,19 +1,21 @@
 spring:
-  cloud: 
-   gateway:
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-              allowedOrigins: 
-                - "*"
-              allowedMethods: 
-                - GET
+    cloud:
+      gateway:
+        globalcors:
+          add-to-simple-url-handler-mapping: true
+          corsConfigurations:
+            '[/**]':
+              allowedOrigins: "http://127.0.0.1:5500"
+              allowedHeaders:
+                - "Origin"
+                - "Content-Type"
+                - "Accept"
+                - "Authorization"
+                - "Referer"
+              allowedMethods:
                 - POST
-                - PUT
-                - DELETE
-              allowedHeaders: 
-                - "*"
-              allowCredentials: true
+                - GET
+                - OPTIONS
       routes:
       - id: serv-vuelos
           #lb:// cuando se va a acceder a través de Eureka
@@ -38,6 +40,8 @@ spring:
           - Path=/sreservas/**
         filters:
           - RewritePath=/sreservas/*, /
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin, RETAIN_FIRST
           
 server:
   port: 11000
